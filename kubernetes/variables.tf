@@ -20,3 +20,7 @@ variable "project_id" {
 variable "region" {
   description = "region"
 }
+
+variable "location" {
+  description = "location"
+}

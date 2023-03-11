@@ -3,3 +3,4 @@
 
 project_id = "gitops-cluster"
 region     = "europe-west1"
+location = "europe-west1-b"
