@@ -62,3 +62,16 @@ resource "google_container_node_pool" "primary_nodes" {
 #   cluster_ca_certificate = google_container_cluster.primary.master_auth.0.cluster_ca_certificate
 # }
 
+resource "time_sleep" "wait_30_seconds" {
+  depends_on      = [google_container_cluster.primary]
+  create_duration = "30s"
+}
+
+module "gke_auth" {
+  depends_on           = [time_sleep.wait_30_seconds]
+  source               = "terraform-google-modules/kubernetes-engine/google//modules/auth"
+  project_id           = var.project_id
+  cluster_name         = google_container_cluster.primary.name
+  location             = var.location
+  use_private_endpoint = false
+}
